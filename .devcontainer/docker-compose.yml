@@ -11,12 +11,22 @@ services:
     image: grafana/grafana
     ports:
         - "3000:3000"
+    volumes: 
+        - grafana_stor:/var/lib/grafana    
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
         MYSQL_ROOT_PASSWORD: root
+    volumes:
+        - mysql:/var/lib/mysql
+        - mysql_config:/ect/mysql
   adminer:
     image: adminer
     ports:
         - 8080:8080
+
+volumes:
+  mysql:
+  mysql_config:
+  grafana_stor:
